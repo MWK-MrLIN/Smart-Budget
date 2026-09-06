@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#b792d6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Smart Budget & Smart Fridge</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --lavender: #b792d6;
+      --lavender-dark: #80629e;
+      --peach: #f6c6aa;
+      --ink: #493c50;
+      --muted: #837688;
+      --surface: #fffaff;
+      --shadow: 0 18px 50px rgba(108, 78, 126, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(145deg, #f8effc 0%, #fff5ed 100%);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .shell {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100dvh;
+      min-height: 100%;
+      padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 4px 8px 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(145deg, var(--lavender), var(--peach));
+      box-shadow: 0 8px 18px rgba(126, 94, 151, .2);
+      font-size: 18px;
+    }
+
+    .open-link {
+      color: var(--lavender-dark);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .frame-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid rgba(183, 146, 214, .2);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      border: 0;
+      background: #fffaff;
+    }
+
+    .loading {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(255, 250, 255, .92);
+      color: var(--muted);
+      text-align: center;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    .loading.is-hidden { opacity: 0; }
+
+    .loading-card {
+      max-width: 280px;
+      padding: 20px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 12px 35px rgba(108, 78, 126, .12);
+    }
+
+    .cat { margin-bottom: 8px; font-size: 32px; }
+    .loading-title { color: var(--ink); font-weight: 800; }
+    .loading-text { margin-top: 6px; font-size: 13px; line-height: 1.5; }
+
+    @media (min-width: 800px) {
+      .shell { padding: 16px; }
+      .topbar { width: min(1180px, 100%); margin: 0 auto; padding-inline: 2px; }
+      .frame-wrap { width: min(1180px, 100%); margin: 0 auto; border-radius: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand" aria-label="Smart Budget & Smart Fridge">
+        <span class="brand-mark" aria-hidden="true">⌂</span>
+        <span>Smart Budget & Smart Fridge</span>
+      </div>
+      <a class="open-link" href="https://script.google.com/macros/s/AKfycbxA7FWPivO7gdWGS3uqEA48QzAel3PdB87ZH4xfiU8dnCO2MKh_hAxWrPxRCpJMhPz8TA/exec" target="_blank" rel="noopener">เปิดเต็มหน้า</a>
+    </header>
+
+    <section class="frame-wrap" aria-label="Smart Budget Web App">
+      <iframe id="appFrame" title="Smart Budget & Smart Fridge" allow="fullscreen; camera" referrerpolicy="strict-origin-when-cross-origin" src="https://script.google.com/macros/s/AKfycbxA7FWPivO7gdWGS3uqEA48QzAel3PdB87ZH4xfiU8dnCO2MKh_hAxWrPxRCpJMhPz8TA/exec"></iframe>
+      <div id="loading" class="loading">
+        <div class="loading-card">
+          <div class="cat" aria-hidden="true">⌁</div>
+          <div class="loading-title">กำลังเปิด Smart Budget</div>
+          <div class="loading-text">กำลังเชื่อมต่อกับ Google Apps Script และ Google ชีต</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const frame = document.getElementById('appFrame');
+    const loading = document.getElementById('loading');
+    frame.addEventListener('load', () => loading.classList.add('is-hidden'));
+    window.setTimeout(() => loading.classList.add('is-hidden'), 12000);
+  </script>
+</body>
+</html>
